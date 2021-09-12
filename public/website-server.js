@@ -19,8 +19,8 @@ const {exec} = require("child_process");
 var FILEPATH = "/var/www/webrtc/public/data";
 
 // Public Self-Signed Certificates for HTTPS connection
-var privateKey  = fs.readFileSync('./../certificates/privkey1.pem', 'utf8');
-var certificate = fs.readFileSync('./../certificates/cert1.pem', 'utf8');
+var privateKey  = fs.readFileSync('./certificates/privkey1.pem', 'utf8');
+var certificate = fs.readFileSync('./certificates/cert1.pem', 'utf8');
 
 var credentials = {key: privateKey, cert: certificate};
 var express = require('express');
@@ -74,9 +74,9 @@ Object.keys(ifaces).forEach(function (ifname) {
 // Allow access from all the devices of the network (as long as connections are allowed by the firewall)
 var LANAccess = "0.0.0.0";
 // For http
-httpServer.listen(8080, LANAccess);
+httpServer.listen(8080 || process.env.PORT, LANAccess);
 // For https
-httpsServer.listen(8443, LANAccess);
+httpsServer.listen(8443 || process.env.SECURE_PORT, LANAccess);
 
 app.get('/', function (req, res) {
     res.sendFile(path.join(__dirname+'/index.html'));
@@ -211,7 +211,7 @@ app.get('/list-recordings', function (req, res) {
 
 });
 
-
+//console.log(__dirname);
 
 // Expose the css and js resources as "resources"
-app.use('/resources', express.static('./source'));
+app.use('/resources', express.static(__dirname+'/source'));

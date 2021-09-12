@@ -29,20 +29,28 @@ document.addEventListener("DOMContentLoaded", function(event) {
      * The iceServers on this example are public and can be used for your project.
      */
     var peer = new Peer(qid, {
-        host: "yourdomain.com",
+    	//192.168.1.75 aloapp.software
+        host: "aloapp.software",
         port: 9000,
         path: '/peerjs',
         debug: 3,
         config: {
-            'iceServers': [
-                { url: 'stun:108.177.98.127:19302' },
-                {
-                    url: 'turn:numb.viagenie.ca',
-                    credential: 'muazkh',
-                    username: 'webrtc@live.com'
-                }
-	       
-            ]
+            iceServers: [{
+   urls: [ "stun:ss-turn1.xirsys.com" ]
+}, {
+   username: "YX5ln94dST7Kw3Sfs8h6oO1GApjoofmAlOUA8BTPwLc3ShgqLQMlxL_75dpSqVeOAAAAAGEaYEluaWVubHVhbm5nYW5oY3Q0NjY=",
+   credential: "40ff7ba8-fe91-11eb-8e5b-0242ac140004",
+   urls: [
+       "turn:ss-turn1.xirsys.com:80?transport=udp",
+       "turn:ss-turn1.xirsys.com:3478?transport=udp",
+       "turn:ss-turn1.xirsys.com:80?transport=tcp",
+       "turn:ss-turn1.xirsys.com:3478?transport=tcp",
+       "turns:ss-turn1.xirsys.com:443?transport=tcp",
+       "turns:ss-turn1.xirsys.com:5349?transport=tcp"
+   ]
+}]
+
+
         }
     });
 
